@@ -1,0 +1,4 @@
+Gerekliler:
+tblkargo
+tblkargolist
+tblkargo_iade
