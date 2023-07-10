@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <?php init_head(); ?>
-<?php include "inc/db.php" ?>
+
 <div id="wrapper">
     <div class="content">
         <div class="row">
@@ -53,7 +53,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $suankim = $_SESSION['staff_user_id'];
+                                    /*$suankim = $_SESSION['staff_user_id'];
                                     if ($suankim == "1") {
                                         $query = $db->prepare("SELECT * FROM tblkargo WHERE durum=? ");
                                         $query->execute(array("Teslim Edildi"));
@@ -78,57 +78,58 @@
                                         $staf2 = $db->prepare("SELECT * FROM tblstaff WHERE staffid=?");
                                         $staf2->execute(array($result['teslimkisi']));
                                         $stafsonuc2 = $staf2->fetch(PDO::FETCH_ASSOC);
+                                    */
                                     ?>
                                         <tr>
 
                                             <th>
-                                                <?= $result['id'] ?>
+                                                <?php // $result['id'] ?>
                                             </th>
                                             <th>
-                                                <a href="../clients/client/<?= $result['musteri_id'] ?>"> <?= $musterisonuc['company'] ?></a>
+                                                <a href="../clients/client/<?php // $result['musteri_id'] ?>"> <?php // $musterisonuc['company'] ?></a>
                                             </th>
                                             <th>
-                                                <?= $result['adres'] ?>
+                                                <?php // $result['adres'] ?>
                                             </th>
-                                            <th><?= $result['mahalle'] ?></th>
+                                            <th><?php // $result['mahalle'] ?></th>
                                             <th>
-                                                <?= $result['eyalet'] ?>
+                                                <?php // $result['eyalet'] ?>
                                             </th>
                                             <th>
-                                                <?= $result['postakodu'] ?>
+                                                <?php // $result['postakodu'] ?>
                                             </th>
-                                            <th><?= $urunsonuc['urun_ismi'] ?></th>
+                                            <th><?php // $urunsonuc['urun_ismi'] ?></th>
                                             <th>
-                                                <?= $musterisonuc['phonenumber'] ?>
+                                                <?php // $musterisonuc['phonenumber'] ?>
                                             </th>
 
                                             <th>
-                                                <?= $result['tarih'] ?>
+                                                <?php // $result['tarih'] ?>
                                             </th>
                                             <th>
-                                                <?= $result['gonderim'] ?>
+                                                <?php // $result['gonderim'] ?>
                                             </th>
-                                            <th><?= $result['fatura_no'] ?></th>
-                                            <th><?= $result['fatura_not'] ?></th>
-                                            <th><?= $stafsonuc['firstname'] ?> <?= $stafsonuc['lastname'] ?></th>
-                                            <th><?= $result['durum'] ?></th>
-                                            <th><?= $result['teslimtarih'] ?></th>
-                                            <th><?= $stafsonuc2['firstname'] ?> <?= $stafsonuc2['lastname'] ?></th>
-                                            <th><?= $result['takip_numarası'] ?><br>
-                                                <a onclick="kargo_control('<?= $result['takip_numarası'] ?>')" class="btn btn-warning">Kargo Kontrol Et</a>
+                                            <th><?php // $result['fatura_no'] ?></th>
+                                            <th><?php // $result['fatura_not'] ?></th>
+                                            <th><?php // $stafsonuc['firstname'] ?> <?php // $stafsonuc['lastname'] ?></th>
+                                            <th><?php // $result['durum'] ?></th>
+                                            <th><?php // $result['teslimtarih'] ?></th>
+                                            <th><?php // $stafsonuc2['firstname'] ?> <?php // $stafsonuc2['lastname'] ?></th>
+                                            <th><?php // $result['takip_numarası'] ?><br>
+                                                <a onclick="kargo_control('<?php // $result['takip_numarası'] ?>')" class="btn btn-warning">Kargo Kontrol Et</a>
 
                                             </th>
                                             <th><?php
-                                                if (!empty($result['kargo_foto'])) {
+                                                /*if (!empty($result['kargo_foto'])) {
                                                     echo "<div id='resimdiv'>";
                                                     echo "<a href='../../assets/images/kargo/kargo/" . $result['kargo_foto'] . "'><img src='../../assets/images/kargo/kargo/" . $result['kargo_foto'] . "' width='50' height='50'></a></div>";
-                                                }
+                                                }*/
                                                 ?> </th>
 
 
                                         </tr>
                                     <?php
-                                    }
+                                    //}
                                     ?>
                                 </tbody>
                             </table>

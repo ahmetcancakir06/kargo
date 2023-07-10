@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <?php init_head(); ?>
-<?php include "inc/db.php" ?>
+
 <div id="wrapper">
     <div class="content">
         <div class="row">
@@ -54,7 +54,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $suankim = $_SESSION['staff_user_id'];
+                                    /*$suankim = $_SESSION['staff_user_id'];
                                     if ($suankim == "1") {
                                         $query = $db->prepare("SELECT * FROM tblkargo WHERE durum=?");
                                         $query->execute(array("Gönderildi"));
@@ -84,63 +84,63 @@
 
                                         $staf2 = $db->prepare("SELECT * FROM tblstaff WHERE staffid=?");
                                         $staf2->execute(array($result['gonderenkisi']));
-                                        $stafsonuc2 = $staf2->fetch(PDO::FETCH_ASSOC);
+                                        $stafsonuc2 = $staf2->fetch(PDO::FETCH_ASSOC); */
                                     ?>
                                         <tr>
 
                                             <th>
-                                                <?= $result['id'] ?>
+                                                <?php // $result['id'] ?>
                                             </th>
                                             <th>
-                                                <a href="../clients/client/<?= $result['musteri_id'] ?>">
-                                                    <?= $musterisonuc['company'] ?></a>
+                                                <a href="../clients/client/<?php // $result['musteri_id'] ?>">
+                                                    <?php // $musterisonuc['company'] ?></a>
                                             </th>
                                             <th>
-                                                <?= $result['adres'] ?>
+                                                <?php // $result['adres'] ?>
                                             </th>
-                                            <th><?= $result['mahalle'] ?></th>
+                                            <th><?php // $result['mahalle'] ?></th>
                                             <th>
-                                                <?= $result['eyalet'] ?>
-                                            </th>
-                                            <th>
-                                                <?= $result['postakodu'] ?>
-                                            </th>
-                                            <th><?= $urunismi ?></th>
-                                            <th>
-                                                <?= $musterisonuc['phonenumber'] ?>
+                                                <?php // $result['eyalet'] ?>
                                             </th>
                                             <th>
-                                                <?= $result['tarih'] ?>
+                                                <?php // $result['postakodu'] ?>
+                                            </th>
+                                            <th><?php // $urunismi ?></th>
+                                            <th>
+                                                <?php // $musterisonuc['phonenumber'] ?>
                                             </th>
                                             <th>
-                                                <?= $result['gonderim'] ?>
+                                                <?php // $result['tarih'] ?>
                                             </th>
-                                            <th><?= $result['fatura_no'] ?></th>
-                                            <th><?= $result['fatura_not'] ?></th>
-                                            <th><?= $stafsonuc['firstname'] ?> <?= $stafsonuc['lastname'] ?></th>
-                                            <th><?= $result['durum'] ?></th>
-                                            <th><?= $result['gonderilenkargotarih'] ?></th>
-                                            <th><?= $stafsonuc2['firstname'] ?> <?= $stafsonuc2['lastname'] ?></th>
-                                            <th><?= $result['takip_numarası'] ?><br>
-                                                <a onclick="kargo_control('<?= $result['takip_numarası'] ?>')" class="btn btn-warning">Kargo Kontrol Et</a>
+                                            <th>
+                                                <?php // $result['gonderim'] ?>
+                                            </th>
+                                            <th><?php // $result['fatura_no'] ?></th>
+                                            <th><?php // $result['fatura_not'] ?></th>
+                                            <th><?php // $stafsonuc['firstname'] ?> <?php // $stafsonuc['lastname'] ?></th>
+                                            <th><?php // $result['durum'] ?></th>
+                                            <th><?php // $result['gonderilenkargotarih'] ?></th>
+                                            <th><?php // $stafsonuc2['firstname'] ?> <?php // $stafsonuc2['lastname'] ?></th>
+                                            <th><?php // $result['takip_numarası'] ?><br>
+                                                <a onclick="kargo_control('<?php // $result['takip_numarası'] ?>')" class="btn btn-warning">Kargo Kontrol Et</a>
                                             </th>
                                             <th><?php
-                                                if (!empty($result['kargo_foto'])) {
+                                                /*if (!empty($result['kargo_foto'])) {
                                                     echo "<div id='resimdiv'>";
                                                     echo "<a href='../../assets/images/kargo/kargo/" . $result['kargo_foto'] . "'><img src='../../assets/images/kargo/kargo/" . $result['kargo_foto'] . "' width='50' height='50'></a></div>";
-                                                }
+                                                }*/
                                                 ?> </th>
                                             <th>
                                                 <div class="onoffswitch">
-                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox change-status" id="status_<?= $result['id'] ?>" data-target="Teslim Edildi" data-id="<?= $result['id'] ?>" <?= $result['durum'] == "Teslim Edildi" ? "checked" : "" ?>>
-                                                    <label class="onoffswitch-label" for="status_<?= $result['id'] ?>"></label>
+                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox change-status" id="status_<?php // $result['id'] ?>" data-target="Teslim Edildi" data-id="<?php // $result['id'] ?>" <?php // $result['durum'] == "Teslim Edildi" ? "checked" : "" ?>>
+                                                    <label class="onoffswitch-label" for="status_<?php // $result['id'] ?>"></label>
                                                 </div>
                                             </th>
 
                                         </tr>
 
                                     <?php
-                                    }
+                                    // }
                                     ?>
                                 </tbody>
                             </table>
@@ -150,7 +150,7 @@
             </div>
         </div>
     </div>
-    <input type="hidden" id="staff_user_id" value="<?= $_SESSION['staff_user_id'] ?>">
+    <input type="hidden" id="staff_user_id" value="<?php // $_SESSION['staff_user_id'] ?>">
 
 
     <?php init_tail(); ?>

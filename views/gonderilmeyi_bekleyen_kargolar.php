@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <?php init_head(); ?>
-<?php include "inc/db.php" ?>
 <div id="wrapper">
     <div class="content">
         <div class="row">
@@ -60,7 +59,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $suankim = $_SESSION['staff_user_id'];
+                                    /*$suankim = $_SESSION['staff_user_id'];
 
                                     $query = $db->prepare("SELECT * FROM tblkargo WHERE durum=? AND staff_user_id=?");
                                     $query->execute(array("Göndermeye Hazır", $suankim));
@@ -88,64 +87,64 @@
                                         $faturaget = $db->prepare("SELECT * FROM tblinvoices WHERE hash=?");
                                         $faturaget->execute(array($result['fatura_no']));
                                         $faturasonuc = $faturaget->fetch(PDO::FETCH_ASSOC);
-
+*/
                                     ?>
                                         <tr>
                                             <th>
                                                 <div class="custom-checkbox custom-control ml-3">
-                                                    <input type="checkbox" id="chckboox" value="<?= $result['id'] ?>" class="custom-control-input chckboox">
+                                                    <input type="checkbox" id="chckboox" value="<?php // $result['id'] ?>" class="custom-control-input chckboox">
                                                     <label class="custom-control-label" for="chckboox">&nbsp;</label>
                                                 </div>
                                             </th>
                                             <th>
-                                                <?= $result['id'] ?>
+                                                <?php // $result['id'] ?>
                                             </th>
                                             <th>
-                                                <a href="../clients/client/<?= $result['musteri_id'] ?>">
-                                                    <?= $musterisonuc['company'] ?></a>
+                                                <a href="../clients/client/<?php // $result['musteri_id'] ?>">
+                                                    <?php // $musterisonuc['company'] ?></a>
                                             </th>
                                             <th>
-                                                <?= $result['adres'] ?>
+                                                <?php // $result['adres'] ?>
                                             </th>
-                                            <th><?= $result['mahalle'] ?></th>
+                                            <th><?php // $result['mahalle'] ?></th>
                                             <th>
-                                                <?= $result['eyalet'] ?>
+                                                <?php // $result['eyalet'] ?>
                                             </th>
                                             <th>
-                                                <?= $result['postakodu'] ?>
+                                                <?php // $result['postakodu'] ?>
                                             </th>
-                                            <th><?= $urunismi ?></th>
+                                            <th><?php // $urunismi ?></th>
                                             <th>
-                                                <?= $musterisonuc['phonenumber'] ?>
+                                                <?php // $musterisonuc['phonenumber'] ?>
                                             </th>
 
                                             <th>
-                                                <?= $result['tarih'] ?>
+                                                <?php // $result['tarih'] ?>
                                             </th>
                                             <th>
 
-                                                <?= $result['gonderim'] ?>
+                                                <?php // $result['gonderim'] ?>
                                             </th>
-                                            <th><?php if ($result['iadedurum'] == "Cihaz İadesi Bekliyoruz") {
+                                            <th><?php /*if ($result['iadedurum'] == "Cihaz İadesi Bekliyoruz") {
                                                     echo "<a target='_blank' href='../clients/client/" . $result['musteri_id'] . "?group=kargo'>Cihaz İadesi Bekliyoruz</a>";
                                                 } else {
                                                     echo $result['gonderim'];
-                                                } ?></th>
-                                            <th><?= $result['fatura_no'] ?><br><?= (!empty($result['fatura_no']) ? "<a href='../../invoice/" . $faturasonuc["id"] . "/" . $faturasonuc["hash"] . "' target='_blank'>Göster</a>" : "") ?></th>
-                                            <th><?= $result['fatura_not'] ?></th>
-                                            <th><?= $stafsonuc['firstname'] ?> <?= $stafsonuc['lastname'] ?></th>
-                                            <th><?= $result['durum'] ?></th>
+                                                } */?></th>
+                                            <th><?php // $result['fatura_no'] ?><br><?php // (!empty($result['fatura_no']) ? "<a href='../../invoice/" . $faturasonuc["id"] . "/" . $faturasonuc["hash"] . "' target='_blank'>Göster</a>" : "") ?></th>
+                                            <th><?php // $result['fatura_not'] ?></th>
+                                            <th><?php // $stafsonuc['firstname'] ?> <?php // $stafsonuc['lastname'] ?></th>
+                                            <th><?php // $result['durum'] ?></th>
                                             <th>
-                                                <a href="../../exec/kargoprint.php?id=<?= $result['id'] ?>" target="_blank" class="btn btn-warning">Print</a>
+                                                <a href="print?id=<?php // $result['id'] ?>" target="_blank" class="btn btn-warning">Print</a>
                                             </th>
 
                                             <th>
-                                                <button id="gonderbutton" onclick="kargo_gonder(<?= $result['id'] ?>)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Gönder</button>
+                                                <button id="gonderbutton" onclick="kargo_gonder(<?php // $result['id'] ?>)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Gönder</button>
                                             </th>
 
                                         </tr>
                                     <?php
-                                    }
+                                    //}
                                     ?>
                                 </tbody>
                             </table>
@@ -160,7 +159,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <input type="hidden" name="staff_user_id" value="<?= $_SESSION['staff_user_id'] ?>">
+                        <input type="hidden" name="staff_user_id" value="<?php // $_SESSION['staff_user_id'] ?>">
 
                         <h5 class="modal-title" id="exampleModalLabel">Kargoyu Gönder</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -196,7 +195,7 @@
             </div>
         </div>
     </form>
-    <form id="cokyaz" method="POST" action="../../exec/kargoprintcoklu.php" enctype="multipart/form-data">
+    <form id="cokyaz" method="POST" action="print" >
         <input type="hidden" name="idlerprint" id="idlerprint">
     </form>
     <?php init_tail(); ?>
@@ -268,7 +267,8 @@
 
         function multipleprint() {
             $('#idlerprint').val(check);
-            $('#cokyaz').submit();
+            window.open('print?' + no, '_blank');
+
 
         }
 

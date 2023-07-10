@@ -45,7 +45,7 @@
 
 
                         <form id="faturaekle" action="" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="staff_user_id" value="<?= $_SESSION['staff_user_id'] ?>">
+                            <input type="hidden" name="staff_user_id" value="<?php $_SESSION['staff_user_id'] ?>">
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl" role="document">
@@ -346,6 +346,7 @@
                             </thead>
                             <tbody>
                                 <?php
+                                /*
                                 $kimsuan = $_SESSION['staff_user_id'];
                                 if ($kimsuan == "1") {
                                     $query = $db->prepare("SELECT * FROM tblkargo");
@@ -385,86 +386,89 @@
                                     $staf3 = $db->prepare("SELECT * FROM tblstaff WHERE staffid=?");
                                     $staf3->execute(array($result['teslimkisi']));
                                     $stafsonuc3 = $staf3->fetch(PDO::FETCH_ASSOC);
+                                */
                                 ?>
                                     <tr>
 
                                         <th>
-                                            <?= $result['id'] ?>
+                                            <?php /*$result['id']*/ ?>
                                         </th>
                                         <th>
-                                            <a href="clients/client/<?= $result['musteri_id'] ?>"> <?= $musterisonuc['company'] ?></a>
+                                            <a href="clients/client/<?php //$result['musteri_id'] ?>"> <?php //$musterisonuc['company'] ?></a>
                                         </th>
                                         <th>
-                                            <?= $result['adres'] ?>
+                                            <?php //$result['adres'] ?>
                                         </th>
-                                        <th><?= $result['mahalle'] ?></th>
+                                        <th><?php //$result['mahalle'] ?></th>
                                         <th>
-                                            <?= $result['eyalet'] ?>
+                                            <?php //$result['eyalet'] ?>
                                         </th>
                                         <th>
-                                            <?= $result['postakodu'] ?>
+                                            <?php //$result['postakodu'] ?>
                                         </th>
-                                        <td width="50%"><?= $urunismi ?></td>
-                                        <th><?= $musterisonuc['phonenumber'] ?></th>
-                                        <th><?= $result['tarih'] ?></th>
-                                        <th><?= $result['gonderim'] ?></th>
-                                        <th><?= $result['fatura_no'] ?></th>
-                                        <th><?= $result['fatura_not'] ?></th>
-                                        <th><?= $stafsonuc['firstname'] ?> <?= $stafsonuc['lastname'] ?></th>
-                                        <th><?= $result['durum'] ?></th>
-                                        <th><?= $result['gonderilenkargotarih'] ?></th>
-                                        <th><?= $stafsonuc2['firstname'] ?> <?= $stafsonuc2['lastname'] ?></th>
-                                        <th><?= $result['teslimtarih'] ?></th>
-                                        <th><?= $stafsonuc3['firstname'] ?> <?= $stafsonuc3['lastname'] ?></th>
-                                        <th><?= $result['takip_numarası'] ?></th>
+                                        <td width="50%"><?php //$urunismi ?></td>
+                                        <th><?php //$musterisonuc['phonenumber'] ?></th>
+                                        <th><?php //$result['tarih'] ?></th>
+                                        <th><?php //$result['gonderim'] ?></th>
+                                        <th><?php //$result['fatura_no'] ?></th>
+                                        <th><?php //$result['fatura_not'] ?></th>
+                                        <th><?php //$stafsonuc['firstname'] ?> <?php //$stafsonuc['lastname'] ?></th>
+                                        <th><?php //$result['durum'] ?></th>
+                                        <th><?php //$result['gonderilenkargotarih'] ?></th>
+                                        <th><?php //$stafsonuc2['firstname'] ?> <?php //$stafsonuc2['lastname'] ?></th>
+                                        <th><?php //$result['teslimtarih'] ?></th>
+                                        <th><?php //$stafsonuc3['firstname'] ?> <?php //$stafsonuc3['lastname'] ?></th>
+                                        <th><?php //$result['takip_numarası'] ?></th>
 
                                         <th><?php
+                                            /*
                                             if (!empty($result['kargo_foto'])) {
                                                 echo "<div class='resimkut' id='resimdiv'>";
                                                 echo "<a href='../assets/images/kargo/kargo/" . $result['kargo_foto'] . "'><img src='../assets/images/kargo/kargo/" . $result['kargo_foto'] . "' width='50' height='50'></a></div>";
-                                            }
+                                            }*/
                                             ?>
                                         </th>
                                         <th>
                                             <?php
+                                            /*
                                             if ($iadesonuc['durum'] == "Bekleniyor") {
                                                 echo "<a href='clients/client/" . $result['musteri_id'] . "?group=kargo'>Bekleniyor</a>";
                                             } else if ($iadesonuc['durum'] == "İade Edildi") {
                                                 echo "<a href='kargo/iade_kargolar?sorgu=0'>İade Edildi</a>";
                                             }
-
+                                            */
                                             ?>
                                         </th>
                                         <th>
                                             <?php
                                             /*if (has_permission('kargo', '', 'kargoduzenle')) {
                                             ?>
-                                                <a href="javascript:void(0);" data-target="#Modal" data-toggle="modal" class="btn btn-primary" onclick="kargo_get(<?= $result['id'] ?>)">
+                                                <a href="javascript:void(0);" data-target="#Modal" data-toggle="modal" class="btn btn-primary" onclick="kargo_get(<?php $result['id'] ?>)">
                                                     Düzenle
                                                 </a>
                                             <?php
                                             }*/
-                                            if ($_SESSION['staff_user_id'] == "1") {
+                                           /* if ($_SESSION['staff_user_id'] == "1") {
                                             ?>
-                                                <a href="javascript:void(0);" data-target="#Modaldurum" data-toggle="modal" class="btn btn-primary" onclick="durumguncelle(<?= '\'' . $result['id'] . '\',\'' . $result['durum'] . '\',\'' . $result['takip_numarası'] . '\',\'' . $result['kargo_foto'] . '\',\'' . $result['fatura_not'] . '\'' ?>)">
+                                                <a href="javascript:void(0);" data-target="#Modaldurum" data-toggle="modal" class="btn btn-primary" onclick="durumguncelle(<?php '\'' . $result['id'] . '\',\'' . $result['durum'] . '\',\'' . $result['takip_numarası'] . '\',\'' . $result['kargo_foto'] . '\',\'' . $result['fatura_not'] . '\'' ?>)">
                                                     Düzenle
                                                 </a>
                                             <?php
                                             }
                                             if (has_permission('kargo', '', 'kargosilme')) {
                                             ?>
-                                                <a href="javascript:void(0);" onclick="kargo_delete('<?= $result['id'] ?>')" class="btn btn-danger mb-1 mb-md-0">
+                                                <a href="javascript:void(0);" onclick="kargo_delete('<?php //$result['id'] ?>')" class="btn btn-danger mb-1 mb-md-0">
                                                     Sil
                                                 </a>
                                             <?php
-                                            }
+                                            }*/
                                             ?>
 
                                         </th>
 
                                     </tr>
                                 <?php
-                                }
+                               // }
                                 ?>
                             </tbody>
                         </table>
@@ -475,7 +479,7 @@
     </div>
 
     <form id="guncelle" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="staff_user_id1" value="<?= $_SESSION['staff_user_id'] ?>">
+        <input type="hidden" name="staff_user_id1" value="<?php $_SESSION['staff_user_id'] ?>">
         <input type="hidden" name="updateid" id="updateid">
 
         <div class="modal fade bd-example-modal-l" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -565,12 +569,12 @@
                                     <select class="form-control" onchange="urunbilgiler1(this);" id="urun_ismignc" name="urun_ismignc">
                                         <option id="urunopt">Seçiniz</option>
                                         <?php
-                                        $urunget = $db->prepare("SELECT * FROM tblkargolist");
+                                        /*$urunget = $db->prepare("SELECT * FROM tblkargolist");
                                         $urunget->execute();
                                         $urunresult = $urunget->fetchAll(PDO::FETCH_ASSOC);
                                         foreach ($urunresult as $ff) {
                                             echo "<option value='" . $ff['id'] . "'>" . $ff['urun_ismi'] . "</option>";
-                                        }
+                                        }*/
 
                                         ?>
                                     </select>
@@ -762,7 +766,7 @@
 
     <!--DURUM GÜNCELLEME MODAL -->
     <form id="durumguncellemodal" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="staff_user_id2" value="<?= $_SESSION['staff_user_id'] ?>">
+        <input type="hidden" name="staff_user_id2" value="<?php $_SESSION['staff_user_id'] ?>">
         <input type="hidden" name="updateiddurum" id="updateiddurum">
 
         <div class="modal fade bd-example-modal-l" id="Modaldurum" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -870,15 +874,15 @@
         function urunekle() {
             urunsayac += 1;
             $.ajax({
-                url: '../exec/ajaxgetkargos.php',
-                dataType: 'html',
-                method: 'post',
+                url: 'kargo/urun_ekle',
+                method: 'POST',
+                dataType: 'json',
                 data: {
                     'urunsayac': urunsayac
 
                 },
                 success: function(results) {
-                    $('#kargourundiv').append(results);
+                    $('#kargourundiv').append(results.html);
 
 
                 }
