@@ -89,7 +89,7 @@ class Kargo extends AdminController
         $data['title'] = _l('Kargo List');
         $this->load->view('kargo/kargolist', array());
     }
-
+    
     public function urun_ekle()
     {
         $this->load->library('urunekle');
@@ -102,4 +102,44 @@ class Kargo extends AdminController
         echo json_encode($response);
     }
 
+
+
+
+
+
+    //------------------- kargo_update ------------------------------------
+    public function kargo_report()
+    {
+        $contents = "";
+        if (file_exists(dirname(__FILE__) . "/update_report.txt"))
+            $contents = file_get_contents(dirname(__FILE__) . "/update_report.txt");
+        $data = [
+            "logs" => $contents
+        ];
+        $this->flsuhJson($data);
+        die;
+    }
+
+    public function kargo_update()
+    {
+        if (!has_permission('kargo', '', 'kargo_update')) {
+            access_denied('kargo');
+        }
+        $this->load->library(KARGO_MODULE_NAME . '/' . 'update_module');
+        $this->update_module->update();
+        $data['title'] = _l('kargo_update');
+        $this->load->view('kargo_update', $data);
+    }
+
+    public function flsuhJson($data)
+    {
+        header('Content-Type: application/json', true);
+        echo(json_encode($data));
+
+        // This is what you need
+        ob_flush();
+        flush();
+    }
+
+//\------------------- kargo_update ------------------------------------
 }
