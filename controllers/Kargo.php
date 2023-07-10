@@ -1,4 +1,5 @@
 <?php
+use app\services\utilities\Arr;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -51,6 +52,13 @@ class Kargo extends AdminController
         $data['bootstrap_css'] = base_url('assets/plugins/bootstrap/css/bootstrap.css');
 
         $this->load->view("kargo/print",$data);
+    }
+
+    public function kargolist_all_table(){
+
+
+        $this->app->get_table_data('kargolist_all');
+
     }
     public function gonderilmeyi_bekleyen_kargolar()
     {

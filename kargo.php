@@ -78,7 +78,7 @@ function kargo_module_init_menu_items()
         $CI->app_menu->add_sidebar_menu_item('kargo', [
             'slug'     => 'kargo',
             'name'     => _l('kargo'),
-            'href'     => admin_url('kargo/kargo_all'),
+            'href'     => admin_url('kargo'),
             'icon'     => 'fa fa-user-check',
 
             'position' => 82,

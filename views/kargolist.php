@@ -302,176 +302,64 @@
 
                         <div class="clearfix"></div>
                         <hr class="hr-panel-heading" />
-                        <div class="clearfix"></div>
-                        <table class="table dt-table scroll-responsive" data-order-col="2" data-order-type="desc">
-                            <thead>
-                                <tr>
+                        <div class="clearfix mtop20"></div>
+                        <?php
+                        $table_data = array(
+                            _l("id"),
+                            _l("Kim Ekledi"),
+                            _l('telefon'),
+                            _l("tur"),
+                            _l("konu"),
+                            _l("yorum"),
 
-                                    <th>ID</th>
-                                    <th>Müşteri İsmi</th>
-                                    <th>Adres</th>
-                                    <th>Mahalle</th>
-                                    <th>Eyalet</th>
-                                    <th>Posta Kodu</th>
-                                    <th width="50%">Ürün İsmi</th>
-                                    <th>Müşteri Telefon Numarası</th>
-                                    <th>Tarih</th>
-                                    <th>Gönderim</th>
-                                    <th>Fatura No</th>
-                                    <th>Kargo Notu</th>
-                                    <th>Kim Ekledi</th>
-                                    <th>Durum</th>
-                                    <th>Gönderilen Tarih</th>
-                                    <th>Gönderen Kişi</th>
-                                    <th>Teslim Edilen Tarih</th>
-                                    <th>Teslim Eden Kişi</th>
-                                    <th>Takip Numarası</th>
-                                    <th>Kargo Resmi</th>
-                                    <th>İade</th>
-                                    <th>
-                                        <?php
-                                        if (has_permission('kargo', '', 'kargoduzenle')) {
-                                            echo "Güncelle ";
-                                        }
-                                        if (has_permission('kargo', '', 'kargosilme')) {
-                                            echo "Sil";
-                                        }
+                            _l("tarih"),
+                            _l("kim_ilgileniyor"),
+                            _l("kim_ilgilendi"),
+                            _l("durum"),
+                            _l('alt_kategori'),
+
+                        );
+                        if (has_permission('musteri_listesi', '', 'musteri_listesi_talep_sil')) {
+                            array_push($table_data, _l("delete"));
+                        }
+                        /*$_table_data = array(
+                            '<span class="hide"> - </span><div class="checkbox mass_select_all_wrap"><input type="checkbox" id="mass_select_all" data-to-table="clients_log"><label></label></div>',
+                            array(
+                                'name' => _l('the_number_sign'),
+                                'th_attrs' => array('class' => 'toggleable', 'id' => 'th-number')
+                            ),
+                            array(
+                                'name' => _l('crm_id'),
+                                'th_attrs' => array('class' => 'toggleable', 'id' => 'th-primary-contact')
+                            ),
+                            array(
+                                'name' => _l('user_id'),
+                                'th_attrs' => array('class' => 'toggleable', 'id' => 'th-phone')
+                            ),
+                            array(
+                                'name' => _l('islem'),
+                                'th_attrs' => array('class' => 'toggleable', 'id' => 'th-mac')
+                            ),
+                            array(
+                                'name' => _l('kim'),
+                                'th_attrs' => array('class' => 'toggleable', 'id' => 'th-app_uyelik')
+                            ),
+                            array(
+                                'name' => _l('tarih'),
+                                'th_attrs' => array('class' => 'toggleable', 'id' => 'th-paket')
+                            ),
+                        );
+                        foreach ($_table_data as $_t) {
+
+                            array_push($table_data, $_t);
+                        }*/
 
 
-                                        ?>
+                        $table_data = hooks()->apply_filters('customers_table_columns', $table_data);
 
-                                    </th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                /*
-                                $kimsuan = $_SESSION['staff_user_id'];
-                                if ($kimsuan == "1") {
-                                    $query = $db->prepare("SELECT * FROM tblkargo");
-                                    $query->execute();
-                                    $results = $query->fetchAll(PDO::FETCH_ASSOC);
-                                } else {
-                                    $query = $db->prepare("SELECT * FROM tblkargo WHERE staff_user_id=?");
-                                    $query->execute(array($kimsuan));
-                                    $results = $query->fetchAll(PDO::FETCH_ASSOC);
-                                }
-                                foreach ($results as $result) {
-                                    $urunismi = "";
-                                    $musteri = $db->prepare("SELECT * FROM tblclients WHERE userid=?");
-                                    $musteri->execute(array($result['musteri_id']));
-                                    $musterisonuc = $musteri->fetch(PDO::FETCH_ASSOC);
-                                    $urunidler = explode(",", $result['urun_id']);
-                                    $urunadetex = explode(",", $result['adet']);
-                                    for ($x = 0; $x < count($urunidler); $x++) {
-                                        $urun = $db->prepare("SELECT * FROM tblkargolist WHERE id=?");
-                                        $urun->execute(array($urunidler[$x]));
-                                        $urunsonuc = $urun->fetch(PDO::FETCH_ASSOC);
-                                        $urunismi = $urunismi . $urunsonuc['urun_ismi'] . " Adet = " . $urunadetex[$x] . "<br>";
-                                    }
-
-                                    $iade = $db->prepare("SELECT * FROM tblkargo_iade WHERE kargo_id=?");
-                                    $iade->execute(array($result['id']));
-                                    $iadesonuc = $iade->fetch(PDO::FETCH_ASSOC);
-
-                                    $staf = $db->prepare("SELECT * FROM tblstaff WHERE staffid=?");
-                                    $staf->execute(array($result['staff_user_id']));
-                                    $stafsonuc = $staf->fetch(PDO::FETCH_ASSOC);
-
-                                    $staf2 = $db->prepare("SELECT * FROM tblstaff WHERE staffid=?");
-                                    $staf2->execute(array($result['gonderenkisi']));
-                                    $stafsonuc2 = $staf2->fetch(PDO::FETCH_ASSOC);
-
-                                    $staf3 = $db->prepare("SELECT * FROM tblstaff WHERE staffid=?");
-                                    $staf3->execute(array($result['teslimkisi']));
-                                    $stafsonuc3 = $staf3->fetch(PDO::FETCH_ASSOC);
-                                */
-                                ?>
-                                    <tr>
-
-                                        <th>
-                                            <?php /*$result['id']*/ ?>
-                                        </th>
-                                        <th>
-                                            <a href="clients/client/<?php //$result['musteri_id'] ?>"> <?php //$musterisonuc['company'] ?></a>
-                                        </th>
-                                        <th>
-                                            <?php //$result['adres'] ?>
-                                        </th>
-                                        <th><?php //$result['mahalle'] ?></th>
-                                        <th>
-                                            <?php //$result['eyalet'] ?>
-                                        </th>
-                                        <th>
-                                            <?php //$result['postakodu'] ?>
-                                        </th>
-                                        <td width="50%"><?php //$urunismi ?></td>
-                                        <th><?php //$musterisonuc['phonenumber'] ?></th>
-                                        <th><?php //$result['tarih'] ?></th>
-                                        <th><?php //$result['gonderim'] ?></th>
-                                        <th><?php //$result['fatura_no'] ?></th>
-                                        <th><?php //$result['fatura_not'] ?></th>
-                                        <th><?php //$stafsonuc['firstname'] ?> <?php //$stafsonuc['lastname'] ?></th>
-                                        <th><?php //$result['durum'] ?></th>
-                                        <th><?php //$result['gonderilenkargotarih'] ?></th>
-                                        <th><?php //$stafsonuc2['firstname'] ?> <?php //$stafsonuc2['lastname'] ?></th>
-                                        <th><?php //$result['teslimtarih'] ?></th>
-                                        <th><?php //$stafsonuc3['firstname'] ?> <?php //$stafsonuc3['lastname'] ?></th>
-                                        <th><?php //$result['takip_numarası'] ?></th>
-
-                                        <th><?php
-                                            /*
-                                            if (!empty($result['kargo_foto'])) {
-                                                echo "<div class='resimkut' id='resimdiv'>";
-                                                echo "<a href='../assets/images/kargo/kargo/" . $result['kargo_foto'] . "'><img src='../assets/images/kargo/kargo/" . $result['kargo_foto'] . "' width='50' height='50'></a></div>";
-                                            }*/
-                                            ?>
-                                        </th>
-                                        <th>
-                                            <?php
-                                            /*
-                                            if ($iadesonuc['durum'] == "Bekleniyor") {
-                                                echo "<a href='clients/client/" . $result['musteri_id'] . "?group=kargo'>Bekleniyor</a>";
-                                            } else if ($iadesonuc['durum'] == "İade Edildi") {
-                                                echo "<a href='kargo/iade_kargolar?sorgu=0'>İade Edildi</a>";
-                                            }
-                                            */
-                                            ?>
-                                        </th>
-                                        <th>
-                                            <?php
-                                            /*if (has_permission('kargo', '', 'kargoduzenle')) {
-                                            ?>
-                                                <a href="javascript:void(0);" data-target="#Modal" data-toggle="modal" class="btn btn-primary" onclick="kargo_get(<?php $result['id'] ?>)">
-                                                    Düzenle
-                                                </a>
-                                            <?php
-                                            }*/
-                                           /* if ($_SESSION['staff_user_id'] == "1") {
-                                            ?>
-                                                <a href="javascript:void(0);" data-target="#Modaldurum" data-toggle="modal" class="btn btn-primary" onclick="durumguncelle(<?php '\'' . $result['id'] . '\',\'' . $result['durum'] . '\',\'' . $result['takip_numarası'] . '\',\'' . $result['kargo_foto'] . '\',\'' . $result['fatura_not'] . '\'' ?>)">
-                                                    Düzenle
-                                                </a>
-                                            <?php
-                                            }
-                                            if (has_permission('kargo', '', 'kargosilme')) {
-                                            ?>
-                                                <a href="javascript:void(0);" onclick="kargo_delete('<?php //$result['id'] ?>')" class="btn btn-danger mb-1 mb-md-0">
-                                                    Sil
-                                                </a>
-                                            <?php
-                                            }*/
-                                            ?>
-
-                                        </th>
-
-                                    </tr>
-                                <?php
-                               // }
-                                ?>
-                            </tbody>
-                        </table>
+                        render_datatable($table_data, 'kargo', [], []);
+                        ?>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -870,7 +758,19 @@
     <script src="../inc/lightgallery-all.js"></script>
     <script>
         var urunsayac = 0;
+        $(function () {
+            console.log('tes');
+            var CustomersServerParams = {};
+            $.each($('._hidden_inputs._filters input'), function () {
+                CustomersServerParams[$(this).attr('name')] = '[name="' + $(this).attr('name') + '"]';
+            });
+            CustomersServerParams['exclude_inactive'] = '[name="exclude_inactive"]:checked';
 
+            var tAPI = initDataTable('.table-kargo', admin_url + 'kargo/kargolist_all_table', [0], [0], CustomersServerParams,<?php echo hooks()->apply_filters('customers_table_default_order', json_encode(array(1, 'asc'))); ?>);
+            $('input[name="exclude_inactive"]').on('change', function () {
+                tAPI.ajax.reload();
+            });
+        });
         function urunekle() {
             urunsayac += 1;
             $.ajax({
